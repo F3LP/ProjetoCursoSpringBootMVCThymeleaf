@@ -47,6 +47,14 @@ public class DepartamentoServiceImpl implements DepartamentoService {
 	public List<Departamento> findAll() {
 		return repository.findAll();
 	}
-	
-	
+
+	@Override
+	public boolean departamentoTemCargos(Long id) {
+		System.out.println("###########");
+		if (findById(id).get().getCargos().isEmpty()) {
+			return false;
+		}
+		return true;
+	}
+
 }
