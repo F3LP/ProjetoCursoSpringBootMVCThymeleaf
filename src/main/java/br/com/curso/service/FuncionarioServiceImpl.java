@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.curso.model.Funcionario;
 import br.com.curso.repository.FuncionarioRepository;
@@ -37,11 +38,13 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Optional<Funcionario> findById(Long id) {
 		return repository.findById(id);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Funcionario> findAll() {
 		return repository.findAll();
 	}

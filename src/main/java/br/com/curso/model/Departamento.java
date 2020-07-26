@@ -4,31 +4,18 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-@Entity
-public class Departamento {
+import br.com.curso.domain.AbstractEntity;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+@Entity
+public class Departamento extends AbstractEntity<Long> {
 
 	@Column(nullable = false, unique = true)
 	private String nome;
 
 	@OneToMany(mappedBy = "departamento")
 	private List<Cargo> cargos;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return nome;

@@ -39,18 +39,20 @@ public class DepartamentoServiceImpl implements DepartamentoService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Optional<Departamento> findById(Long id) {
 		return repository.findById(id);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Departamento> findAll() {
 		return repository.findAll();
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public boolean departamentoTemCargos(Long id) {
-		System.out.println("###########");
 		if (findById(id).get().getCargos().isEmpty()) {
 			return false;
 		}

@@ -4,16 +4,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import br.com.curso.domain.AbstractEntity;
 
 @Entity
-public class Endereco {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+public class Endereco extends AbstractEntity<Long> {
 
 	@Column(nullable = false)
 	private String logradouro;
@@ -35,14 +30,6 @@ public class Endereco {
 	private Integer numero;
 
 	private String complemento;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	public String getLogradouro() {
 		return logradouro;
