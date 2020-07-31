@@ -1,7 +1,8 @@
 package br.com.curso.service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,6 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 
 	@Override
 	public void update(Funcionario funcionario) {
-		Objects.nonNull(funcionario);
 		repository.save(funcionario);
 	}
 
@@ -48,6 +48,28 @@ public class FuncionarioServiceImpl implements FuncionarioService {
 	public List<Funcionario> findAll() {
 		return repository.findAll();
 	}
-	
+
+	@Override
+	public List<Funcionario> findByName(String nome) {
+		return repository.findByName(nome);
+	}
+
+	@Override
+	public List<Funcionario> findByCargo(Long id) {
+		return repository.findByCargo(id);
+	}
+
+	@Override
+	public List<Funcionario> findByDatas(LocalDate entrada, LocalDate saida) {
+		if(entrada != null && saida != null) {
+			return repository.findByDataEntradaDataSaida(entrada, saida);
+		} else if(entrada != null) {
+			return repository.findByDataEntrada(entrada);
+		} else if(saida != null) {
+			return repository.findByDataSaida(saida);
+		} else {
+			return new ArrayList<>();
+		}
+	}
 	
 }

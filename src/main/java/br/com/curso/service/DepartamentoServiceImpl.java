@@ -29,7 +29,6 @@ public class DepartamentoServiceImpl implements DepartamentoService {
 
 	@Override
 	public void update(Departamento departamento) {
-		Objects.nonNull(departamento);
 		repository.save(departamento);
 	}
 

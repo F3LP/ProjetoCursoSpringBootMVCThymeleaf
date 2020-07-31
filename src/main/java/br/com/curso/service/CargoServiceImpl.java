@@ -29,7 +29,6 @@ public class CargoServiceImpl implements CargoService {
 
 	@Override
 	public void update(Cargo cargo) {
-		Objects.nonNull(repository.findById(cargo.getId()));
 		repository.save(cargo);
 	}
 

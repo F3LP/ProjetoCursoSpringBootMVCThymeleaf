@@ -1,5 +1,6 @@
 package br.com.curso.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,4 +17,10 @@ public interface FuncionarioService {
 	Optional<Funcionario> findById(Long id);
 
 	List<Funcionario> findAll();
+
+	List<Funcionario> findByName(String nome);
+
+	List<Funcionario> findByCargo(Long id);
+
+	List<Funcionario> findByDatas(LocalDate entrada, LocalDate saida);
 }
