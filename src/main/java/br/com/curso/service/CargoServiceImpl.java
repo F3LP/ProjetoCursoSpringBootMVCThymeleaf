@@ -1,10 +1,13 @@
 package br.com.curso.service;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,16 +48,27 @@ public class CargoServiceImpl implements CargoService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public List<Cargo> findAll() {
-		return repository.findAll();
+	public Page<Cargo> findAll(int page) {
+		Pageable pageable = PageRequest.of(page - 1, 5, Sort.by(Sort.Direction.ASC, "nome"));
+		return repository.findAll(pageable);
 	}
 
 	@Override
 	public boolean cargoTemFuncionarios(Long id) {
-		if(findById(id).get().getFuncionarios().isEmpty()) {
+		if (findById(id).get().getFuncionarios().isEmpty()) {
 			return false;
 		}
 		return true;
+	}
+
+	@Override
+	public List<Cargo> findAll() {
+		return repository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
+	}
+
+	@Override
+	public Page<Cargo> findAll(Pageable pageable) {
+		return repository.findAll(pageable);
 	}
 
 }
