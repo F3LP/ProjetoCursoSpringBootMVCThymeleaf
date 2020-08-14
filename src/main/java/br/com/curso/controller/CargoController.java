@@ -39,7 +39,7 @@ public class CargoController {
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(Cargo cargo) {
-		return "/cargo/cadastro";
+		return "cargo/cadastro";
 	}
 	
 	@GetMapping("/listar")
@@ -53,13 +53,13 @@ public class CargoController {
 		model.addAttribute("paginaAtual", paginaAtual);
 		model.addAttribute("totalPaginas", totalPaginas);
 		
-		return "/cargo/lista";
+		return "cargo/lista";
 	}
 
 	@PostMapping("/salvar")
 	public String salvar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) {
 		if (result.hasErrors()) {
-			return "/cargo/cadastro";
+			return "cargo/cadastro";
 		}
 		
 		cargoService.save(cargo);
@@ -74,7 +74,7 @@ public class CargoController {
 
 	@GetMapping("/editar/{id}")
 	public ModelAndView preEditar(@PathVariable("id") Long id) {
-		ModelAndView mv = new ModelAndView("/cargo/cadastro");
+		ModelAndView mv = new ModelAndView("cargo/cadastro");
 		Optional<Cargo> cargo = cargoService.findById(id);
 		mv.addObject("cargo", cargo.get());
 		return mv;
@@ -84,7 +84,7 @@ public class CargoController {
 	public String editar(@Valid Cargo cargo, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "/cargo/cadastro";
+			return "cargo/cadastro";
 		}
 		
 		cargoService.update(cargo);

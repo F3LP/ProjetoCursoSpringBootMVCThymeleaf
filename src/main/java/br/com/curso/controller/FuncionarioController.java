@@ -48,20 +48,20 @@ public class FuncionarioController {
 		
 	@GetMapping("/cadastrar")
 	public String cadastrar(Funcionario funcionario) {
-		return "/funcionario/cadastro";
+		return "funcionario/cadastro";
 	}
 	
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		model.addAttribute("funcionarios", funcionarioService.findAll());
-		return "/funcionario/lista";
+		return "funcionario/lista";
 	}
 	
 	@PostMapping("/salvar")
 	public String salvar(@Valid Funcionario funcionario, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "/funcionario/cadastro";
+			return "funcionario/cadastro";
 		}
 		
 		funcionarioService.save(funcionario);
@@ -79,7 +79,7 @@ public class FuncionarioController {
 	public String editar(@Valid Funcionario funcionario, BindingResult result, RedirectAttributes attr) {
 		
 		if (result.hasErrors()) {
-			return "/funcionario/cadastro";
+			return "funcionario/cadastro";
 		}
 		
 		funcionarioService.update(funcionario);
@@ -98,14 +98,14 @@ public class FuncionarioController {
 	public String getPorNome(@RequestParam("nome") String nome, ModelMap model) {
 		System.out.println(funcionarioService.findByName(nome));
 		model.addAttribute("funcionarios", funcionarioService.findByName(nome));
-		return "/funcionario/lista";
+		return "funcionario/lista";
 	}
 	
 	@GetMapping("/buscar/cargo")
 	public String getPorCargo(@RequestParam("id") Long id, ModelMap model) {
 		System.out.println(funcionarioService.findByCargo(id));
 		model.addAttribute("funcionarios", funcionarioService.findByCargo(id));
-		return "/funcionario/lista";
+		return "funcionario/lista";
 	}
 	
 	@GetMapping("/buscar/data")
@@ -113,7 +113,7 @@ public class FuncionarioController {
 								@RequestParam("saida") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate saida,
 								ModelMap model) {
 		model.addAttribute("funcionarios", funcionarioService.findByDatas(entrada, saida));
-		return "/funcionario/lista";
+		return "funcionario/lista";
 	}
 	
 	@ModelAttribute("cargos")

@@ -31,20 +31,20 @@ public class DepartamentoController {
 
 	@GetMapping("/cadastrar")
 	public String cadastrar(Departamento departamento) {
-		return "/departamento/cadastro";
+		return "departamento/cadastro";
 	}
 
 	@GetMapping("/listar")
 	public String listar(ModelMap model) {
 		model.addAttribute("departamentos", service.findAll());
-		return "/departamento/lista";
+		return "departamento/lista";
 	}
 
 	@PostMapping("/salvar")
 	public String salvar(@Valid Departamento departamento, BindingResult result, RedirectAttributes attr) {
 
 		if (result.hasErrors()) {
-			return "/departamento/cadastro";
+			return "departamento/cadastro";
 		}
 
 		service.save(departamento);
@@ -54,7 +54,7 @@ public class DepartamentoController {
 
 	@GetMapping("/editar/{id}")
 	public ModelAndView preEditar(@PathVariable("id") Long id) {
-		ModelAndView mv = new ModelAndView("/departamento/cadastro");
+		ModelAndView mv = new ModelAndView("departamento/cadastro");
 		Optional<Departamento> departamento = service.findById(id);
 		mv.addObject("departamento", departamento.get());
 		return mv;
@@ -64,7 +64,7 @@ public class DepartamentoController {
 	public String editar(@Valid Departamento departamento, BindingResult result, RedirectAttributes attr) {
 
 		if (result.hasErrors()) {
-			return "/departamento/cadastro";
+			return "departamento/cadastro";
 		}
 
 		service.update(departamento);

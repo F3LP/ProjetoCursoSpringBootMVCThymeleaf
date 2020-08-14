@@ -15,7 +15,7 @@ public class MyErrorView implements ErrorViewResolver{
 	@Override
 	public ModelAndView resolveErrorView(HttpServletRequest request, HttpStatus status, Map<String, Object> map) {
 
-		ModelAndView mv = new ModelAndView("/error");
+		ModelAndView mv = new ModelAndView("error");
 		mv.addObject("status", status.value());
 		switch (status.value()) {
 			case 404:
